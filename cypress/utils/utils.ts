@@ -90,7 +90,6 @@ import { Jira } from "../e2e/models/administration/jira-connection/jira";
 import { JiraCredentials } from "../e2e/models/administration/credentials/JiraCredentials";
 import { closeModal } from "../e2e/views/assessment.view";
 
-const { _ } = Cypress;
 
 export function inputText(fieldId: string, text: any, log = false): void {
     if (!log) {
@@ -331,8 +330,8 @@ export function selectFilter(filterName: string, identifiedRisk?: boolean, value
         .eq(value)
         .within(() => {
             cy.get("#filtered-by").click();
-            cy.get("div.pf-v5-c-menu__content").within(() => {
-                clickByText("span", filterName);
+            cy.get('ul[aria-labelledby="filtered-by"]').within(() => {
+                clickByText("a", filterName);
             });
         });
 }
